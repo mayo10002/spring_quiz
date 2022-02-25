@@ -42,11 +42,24 @@ public class Lesson04Quiz01Controller {
 	// 가장 최근에 입력된 seller 가져오기
 	// 요청 URL: http://localhost/lesson04/quiz01/seller_info
 	@GetMapping("/lesson04/quiz01/seller_info")
-		public String getSellerView(Model model) {
-			Seller seller = sellerBO.getLastSeller();
+		public String getSellerInfo(
+				@RequestParam(value="id", required=false)
+				Model model) {
+//			Seller seller = sellerBO.getLastSeller();
+		
+		Seller seller = null;
+		if(id == null) {
+			seller= sellerBO.getLastSeller();
+		}else {
+			seller=sellerBO.getSellerById(id);
+		}
 			model.addAttribute("result", seller);
 			model.addAttribute("subject", "판매자 정보");
+			
 			return "lesson04/seller_info";
 		}
+	
+	// 요청 URL:http://localhost/lesson04/quiz01/seller_info?id=1
+	
 
 }
