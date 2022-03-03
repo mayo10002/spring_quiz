@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+nav{height:800px; }
+section{height:800px;}
+footer{height:100px; color:gray; font-size:small;}
+
+.nav-font{color:white; font-weight:bold;}

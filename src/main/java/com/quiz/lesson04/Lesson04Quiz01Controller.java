@@ -43,7 +43,7 @@ public class Lesson04Quiz01Controller {
 	// 요청 URL: http://localhost/lesson04/quiz01/seller_info
 	@GetMapping("/lesson04/quiz01/seller_info")
 		public String getSellerInfo(
-				@RequestParam(value="id", required=false)
+				@RequestParam(value="id", required=false) Integer id,
 				Model model) {
 //			Seller seller = sellerBO.getLastSeller();
 		
