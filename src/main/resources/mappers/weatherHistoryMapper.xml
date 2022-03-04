@@ -4,6 +4,47 @@
  
  <mapper namespace="com.quiz.Lesson05.dao.WeatherHistoryDAO">
  <!--  1번 문제 -->
- 
+	<select id="selectWeatherHistoryList" resultType="com.quiz.Lesson05.model.WeatherHistory">
+		SELECT 
+			`id`
+			,`date`
+			,`weather`
+			,`temperatures`
+			,`precipitation`
+			,`microDust`
+			,`windSpeed`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`weather_history`
+	
+	</select>
+	
+	<insert id="insertWeatherHistory" parameterType="map">
+		INSERT INTO `weather_history`
+			(`date`
+			,`weather`
+			,`temperatures`
+			,`precipitation`
+			,`microDust`
+			,`windSpeed`
+			,`createdAt`
+			,`updatedAt`)
+		VALUES
+			(
+				#{date}
+				,#{weather}
+				,#{temperatures}
+				,#{precipitation}
+				,#{microDust}
+				,#{windSpeed}
+				,NOW()
+				,NOW()
+			
+			)
+	</insert>
+	
  </mapper>
- 
+		
+		
+		

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +39,7 @@ footer{height:100px;}
 			</nav>
 			<section class="bg-white col-9 container">
 				<h3>과거 날씨</h3>
+				
 				<table class="table text-center">
 					<thead>
 						<tr>
@@ -49,21 +52,38 @@ footer{height:100px;}
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
+						<c:forEach items="${weatherHistoryList}" var="weather">
+							<tr>
+								<td><fmt:formatDate value="${weather.date}" pattern="yyyy년 M월 d일" /></td>
+								<td>
+									<c:choose>
+										<c:when test="${weather.weather eq '맑음' }">
+											<img src="image/sunny.jpg" alt="맑음">
+										</c:when>
+										<c:when test="${weather.weather eq '구름조금' }">
+											<img src="image/partlyCloudy.jpg" alt="구름조금">
+										</c:when>
+										<c:when test="${weather.weather eq '흐림' }">
+											<img src="image/cloudy.jpg" alt="흐림">
+										</c:when>
+										<c:when test="${weather.weather eq '비' }">
+										<img src="image/rainy.jpg" alt="비">
+										</c:when>
+									</c:choose>
+								</td>
+								<td>${weather.temperatures}</td>
+								<td>${weather.precipitation}mm</td>
+								<td>${weather.microDust}</td>
+								<td>${weather.windSpeed}km/h</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</section>
 		</div>
 			
 		<footer class=" d-flex">
-			<div class="col-3"></div>
+			<div class="col-3"><img src="/image/logo.png" alt="기상청 로고" width="100"></div>
 			<div class="col-9">(07062) 서울특별시 동작구 여의대방로16길 61<br>
 			Copyright@2022 KMA. All Rights RESERVED. </div>
 		</footer>

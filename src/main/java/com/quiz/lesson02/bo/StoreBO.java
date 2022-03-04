@@ -14,7 +14,7 @@ public class StoreBO {
 	private StoreDAO storeDAO;
 	
 	public List<Store> getStoreList() {
-		List<Store> storeList = storeDAO.selectStoreList();
-		return storeList;
+		return storeDAO.selectStoreList();
 	}
+	
 }

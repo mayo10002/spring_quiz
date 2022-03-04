@@ -1,0 +1,11 @@
+@charset "UTF-8";
+header {height:100px; }
+footer{height:100px;}
+
+.header-font{font-size:40px; color:white; font-weight:bold;}
+.box-text{color:black;}
+.store-box {margin:10px; padding:10px; border: 1px solid #04B4AE; border-radius: 5px 5px / 5px 5px; }
+.store-name{font-size:large; font-weight:bold;}
+.store-info{font-size:small;}
+.footer-font1{font-weight:bold;}
+.footer-font2{font-size:small; color:gray;}
