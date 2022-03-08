@@ -25,7 +25,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${webpageList }" var="webpage" varStatus="status">
+				<c:forEach items="${webpageList}" var="webpage" varStatus="status">
 					<tr>
 						<td>${status.count}</td>
 						<td>${webpage.name}</td>
