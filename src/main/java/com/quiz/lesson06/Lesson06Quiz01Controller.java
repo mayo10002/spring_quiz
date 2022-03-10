@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.quiz.lesson06.bo.WebpageBO;
 import com.quiz.lesson06.model.Webpage;
 
-@RequestMapping("/lesson06/quiz01")
 @Controller
 public class Lesson06Quiz01Controller {
 	@Autowired
@@ -23,14 +22,14 @@ public class Lesson06Quiz01Controller {
 	
 	// 즐겨찾기 추가하는 화면
 	// url: http://localhost/lesson06/quiz01/add_favorite_view
-	@RequestMapping("/add_favorite_view")
+	@RequestMapping("/lesson06/quiz01/add_favorite_view")
 	public String addFavoriteView() {
 		return "lesson06/add_new_favorite";
 	}
 	
 	// 즐겨찾기 목록 화면
 	// url: http://localhost/lesson06/quiz01/favorite_view
-	@RequestMapping("/favorite_view")
+	@RequestMapping("/lesson06/quiz01/favorite_view")
 	public String favoriteView(Model model) {
 		List<Webpage> webpageList = webpageBO.getWebpageList();
 		
@@ -41,7 +40,7 @@ public class Lesson06Quiz01Controller {
 	
 	// 즐겨찾기 추가 수행 - AJAX가 요청하는 API
 	@ResponseBody
-	@PostMapping("/add_favorite")
+	@PostMapping("/lesson06/quiz01/add_favorite")
 	public Map<String, String> addFavorite(
 			@RequestParam("name") String name,
 			@RequestParam("url")String url) {
@@ -55,4 +54,41 @@ public class Lesson06Quiz01Controller {
 		//return 응답값
 		return result;
 	}
+	
+	//quiz02
+	@ResponseBody
+	@PostMapping("/lesson06/quiz02/check_duplication_url")
+	public Map<String, Boolean> checkDuplicationUrl(
+			@RequestParam("url")String url){
+		Map<String, Boolean> result= new HashMap<>();
+		Webpage webpage = webpageBO.getWebpageByUrl(url);
+		
+		if(webpage == null) { // 중복 아님
+			result.put("result", false);
+		}else {
+			// 중복일 때 
+			result.put("result", true);
+		}
+		return result;
+	}
+	
+	//quiz02-2
+	@ResponseBody
+	@PostMapping("/lesson06/quiz02/delete_favorite")
+	public Map<String, String> deleteFavorite(
+			@RequestParam("id")int id){
+		Map<String, String> result = new HashMap<>();
+		result.put("result", "success");
+		
+		// TODO delete DB
+		int row = webpageBO.deleteWebpageById(id);
+		if(row > 0 ) {
+			result.put("result", "success");
+		}else {
+			result.put("result","error");
+			result.put("errorMessage", "삭제하는 데 실패했습니다.");
+		}
+		return result;
+	}
+	
 }

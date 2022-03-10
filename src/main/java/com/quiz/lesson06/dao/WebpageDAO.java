@@ -13,4 +13,7 @@ public interface WebpageDAO {
 	public int insertNewWebpageAsField(
 			@Param("name") String name, 
 			@Param("url") String url);
+	public Webpage selectWebpageByUrl(String url);
+	
+	public int deleteWebpageById(int id);
 }

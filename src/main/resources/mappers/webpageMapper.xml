@@ -31,4 +31,23 @@
 		)
 
 	</insert>
+	<select id="selectWebpageByUrl" parameterType="String" resultType="com.quiz.lesson06.model.Webpage">
+		SELECT
+		`id`
+		,`name`
+		,`url`
+		,`createdAt`
+		,`updatedAt`
+		FROM 
+			`webpage`
+		WHERE
+			`url` = #{url}
+	</select>
+	<delete id="deleteWebpageById" parameterType="int">
+	 DELETE
+	 FROM
+		 `webpage`
+	 WHERE
+		 `id` = #{id}
+	</delete>
 </mapper>

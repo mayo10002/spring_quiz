@@ -18,4 +18,10 @@ public class WebpageBO {
 	public void  addNewWebpageAsField(String name, String url) {
 		webpageDAO.insertNewWebpageAsField(name, url);
 	}
+	public Webpage getWebpageByUrl(String url) {
+		return webpageDAO.selectWebpageByUrl(url);
+	}
+	public int deleteWebpageById(int id) {
+		return webpageDAO.deleteWebpageById(id);
+	}
 }
