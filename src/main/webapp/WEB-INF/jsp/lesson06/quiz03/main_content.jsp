@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <section class="banner bg-info">
-                <img id="bannerImage" src="http://marondal.com/material/images/dulumary/web/front/jquery/test06_banner1.jpg" alt="banner" width="1110px" height="500px">
+                <img id="bannerImage" src="/image/test06_banner1.jpg" alt="banner" width="1110px" height="500px">
             </section>
             <section class="reserve bg-primary d-flex">
                 <section class="real-time-reserved col-4 d-flex justify-content-center align-items-center">
@@ -56,7 +56,7 @@
 
                         <!-- 버튼 -->
                         <div class="text-right mt-3">
-                            <button type="button" class="btn btn-success submit-btn">조회 하기</button>
+                            <button type="button" id="searchBtn" class="btn btn-success submit-btn">조회 하기</button>
                         </div>
                     </div>
                 </section>
@@ -142,7 +142,7 @@
 
                 // 4. 이미지 3초 간격으로 변경하기
 
-                var bannerSrcArr = ['banner1.jpg', 'banner2.jpg', 'banner3.jpg', 'banner4.jpg'];
+                var bannerSrcArr = ["/image/test06_banner1.jpg", "/image/test06_banner2.jpg", "/image/test06_banner3.jpg", "/image/test06_banner4.jpg"];
                 var currentIndex = 0;
                 setInterval(function() {
                     $('#bannerImage').attr('src', bannerSrcArr[currentIndex]);
@@ -152,6 +152,33 @@
                         currentIndex = 0;
                     }
                 }, 3000); // 3초에 한번씩 함수 실행
+                
+                $('#searchBtn').on('click',function(e){
+                	// 3번 문제 : name, phoneNumber validation check해줘야 함
+                	
+                	
+                	//ajax  ( 3번문제 틀 만들고 id값 name 만들어야 함 아직 안함)
+                	$.ajax({
+                		type:"POST"
+                		, url:"/lesson06/quiz04/search_reservation"
+                		, data:{"name":name, "phoneNumber":phoneNumber}
+                		, success:function(data){
+                			if(data.result == "success"){
+                				alert("이름: " + data.booking.name 
+                						+ "\n날짜:" + data.booking.date.slice(0, 10) //2022-03-14
+                						+ "\n인원:" + data.booking.headcount
+                						+ "\n상태:" + data.booking.state 
+                						);
+                			}else{
+                				alert(data.errorMessage);
+                			}
+                		}
+                		,error:function(e){
+                			alert("조회에 실패했습니다.");
+                			
+                		}
+                	});
+                });
 
             });
         </script>

@@ -80,4 +80,27 @@ public class Lesson06Quiz03Controller {
 		}
 		return result;
 	}
+	
+	//예약 조회기능 - ajax
+	@ResponseBody
+	@PostMapping("/lesson06/quiz04/search_reservation")
+	public Map<String, Object> searchReservation(
+			@RequestParam("name") String name,
+			@RequestParam("phoneNumber") String phoneNumber){
+		Map<String,Object> result = new HashMap<>();
+		
+		//select DB
+		Booking booking = bookingBO.getBookingByNameAndPhoneNumber(name, phoneNumber);
+		if (booking != null) {
+			// result 맵 : {"result": "success", "booking":{"id":13,"name":"예약자"...}}
+			
+			result.put("result","success");
+			result.put("booking", booking);
+		}else {
+			result.put("result","error");
+			result.put("errorMessage", "예약 정보가 없습니다.");
+		}
+		
+		return result;
+	}
 }
